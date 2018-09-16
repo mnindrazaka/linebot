@@ -18,10 +18,12 @@ function handleHTML(html) {
 
   $('#technology-most-popular-technologies-professional-developers .bar-label')
     .toArray()
+    .slice(0, 10)
     .forEach(element => languages.push($(element).html()))
 
   $('#technology-most-popular-technologies-professional-developers span')
     .toArray()
+    .slice(0, 10)
     .forEach(element => percentages.push($(element).html()))
 
   return handleData({ languages, percentages })
