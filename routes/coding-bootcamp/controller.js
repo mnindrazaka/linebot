@@ -58,8 +58,8 @@ function makeCarouselColumns(data) {
   }))
 }
 
-function getData(selectorIndex) {
-  return scrapping(selectorIndex).then(response => response)
+function getData(index) {
+  return scrapping(index).then(response => response)
 }
 
 module.exports = callback
