@@ -31,7 +31,7 @@ function makeCarousel(columns) {
 }
 
 function makeCarouselColumns(data) {
-  data.map(item => ({
+  return data.map(item => ({
     imageBackgroundColor: '#FFFFFF',
     title: item.label,
     text: item.percentage,
