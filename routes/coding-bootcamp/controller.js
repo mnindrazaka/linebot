@@ -8,10 +8,18 @@ function callback(req, res) {
 async function handleEvent(event) {
   let echo = {}
 
-  if (event.message.text == '/trends') {
-    echo = makeCarousel(makeCarouselColumns(await getTrendingLanguage()))
-  } else {
-    echo = { type: 'text', text: 'Saya tidak mengerti, saya simpan dulu' }
+  switch (event.message.text) {
+    case 'trending language':
+      echo = makeCarousel(makeCarouselColumns(getData(selectorIndex.language)))
+      break
+    case 'trending framework':
+      echo = makeCarousel(makeCarouselColumns(getData(selectorIndex.framework)))
+      break
+    case 'trending database':
+      echo = makeCarousel(makeCarouselColumns(getData(selectorIndex.database)))
+      break
+    default:
+      echo = { type: 'text', text: 'Saya tidak mengerti, saya simpan dulu' }
   }
 
   return client.replyMessage(event.replyToken, echo)
@@ -50,8 +58,8 @@ function makeCarouselColumns(data) {
   }))
 }
 
-function getTrendingLanguage() {
-  return scrapping(selectorIndex.language).then(response => response)
+function getData(selectorIndex) {
+  return scrapping(selectorIndex).then(response => response)
 }
 
 module.exports = callback
