@@ -51,7 +51,7 @@ function makeCarouselColumns(data) {
 }
 
 function getTrendingLanguage() {
-  return scrapping(selectorIndex.language).then(response => makeCarouselColumns(response))
+  return scrapping(selectorIndex.language).then(response => response)
 }
 
 module.exports = callback
