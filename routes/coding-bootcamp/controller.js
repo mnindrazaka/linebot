@@ -5,7 +5,7 @@ function callback(req, res) {
   Promise.all(req.body.events.map(handleEvent)).then(result => res.json(result))
 }
 
-function handleEvent(event) {
+async function handleEvent(event) {
   let echo = {}
   console.log(event)
 
@@ -15,7 +15,7 @@ function handleEvent(event) {
   return client.replyMessage(event.replyToken, echo)
 }
 
-async function handleMessage(text) {
+function handleMessage(text) {
   console.log(text)
 
   let reply = ''
@@ -43,6 +43,7 @@ async function handleMessage(text) {
 
 function handlePostback(data) {
   console.log(data)
+  return { type: 'text', text: data }
 }
 
 function makeCarousel(columns) {
