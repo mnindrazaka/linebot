@@ -8,15 +8,23 @@ function callback(req, res) {
 async function handleEvent(event) {
   let echo = {}
 
+  console.log('event', event)
+
   switch (event.message.text) {
     case 'trending language':
-      echo = makeCarousel(makeCarouselColumns(await getData(selectorIndex.language)))
+      echo = makeCarousel(
+        makeCarouselColumns(await getData(selectorIndex.language))
+      )
       break
     case 'trending framework':
-      echo = makeCarousel(makeCarouselColumns(await getData(selectorIndex.framework)))
+      echo = makeCarousel(
+        makeCarouselColumns(await getData(selectorIndex.framework))
+      )
       break
     case 'trending database':
-      echo = makeCarousel(makeCarouselColumns(await getData(selectorIndex.database)))
+      echo = makeCarousel(
+        makeCarouselColumns(await getData(selectorIndex.database))
+      )
       break
     default:
       echo = { type: 'text', text: 'Saya tidak mengerti, saya simpan dulu' }

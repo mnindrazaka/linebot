@@ -12,7 +12,9 @@ function loadCheerio(html) {
 }
 
 async function getHTML() {
-  const response = await axios.get('https://insights.stackoverflow.com/survey/2018/')
+  const response = await axios.get(
+    'https://insights.stackoverflow.com/survey/2018/'
+  )
   return response.data
 }
 
