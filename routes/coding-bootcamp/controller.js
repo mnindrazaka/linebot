@@ -16,6 +16,8 @@ function handleEvent(event) {
 }
 
 async function handleMessage(text) {
+  console.log(text)
+
   let reply = ''
   switch (text) {
     case 'trending language':
