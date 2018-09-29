@@ -9,13 +9,16 @@ async function handleEvent(event) {
   let echo = {}
   console.log(event)
 
-  if (event.type == 'message') echo = handleMessage(event.message.text)
-  else if (event.type == 'postback') echo = handlePostback(event.postback.data)
+  if (event.type == 'message') {
+    echo = await handleMessage(event.message.text)
+  } else if (event.type == 'postback') {
+    echo = await handlePostback(event.postback.data)
+  }
 
   return client.replyMessage(event.replyToken, echo)
 }
 
-function handleMessage(text) {
+async function handleMessage(text) {
   console.log(text)
 
   let reply = ''
