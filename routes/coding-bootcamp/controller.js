@@ -5,32 +5,42 @@ function callback(req, res) {
   Promise.all(req.body.events.map(handleEvent)).then(result => res.json(result))
 }
 
-async function handleEvent(event) {
+function handleEvent(event) {
+  // console.log('event', event)
+
   let echo = {}
+  if (event.type == 'message') echo = handleMessage(event.message.text)
+  else if (event.type == 'postback') echo = handlePostback(event.postback.data)
 
-  console.log('event', event)
+  return client.replyMessage(event.replyToken, echo)
+}
 
-  switch (event.message.text) {
+async function handleMessage(text) {
+  let reply = ''
+  switch (text) {
     case 'trending language':
-      echo = makeCarousel(
+      reply = makeCarousel(
         makeCarouselColumns(await getData(selectorIndex.language))
       )
       break
     case 'trending framework':
-      echo = makeCarousel(
+      reply = makeCarousel(
         makeCarouselColumns(await getData(selectorIndex.framework))
       )
       break
     case 'trending database':
-      echo = makeCarousel(
+      reply = makeCarousel(
         makeCarouselColumns(await getData(selectorIndex.database))
       )
       break
     default:
-      echo = { type: 'text', text: 'Saya tidak mengerti, saya simpan dulu' }
+      reply = { type: 'text', text: 'Saya tidak mengerti' }
   }
+  return reply
+}
 
-  return client.replyMessage(event.replyToken, echo)
+function handlePostback(data) {
+  console.log(data)
 }
 
 function makeCarousel(columns) {
@@ -54,13 +64,8 @@ function makeCarouselColumns(data) {
     actions: [
       {
         type: 'postback',
-        label: 'Add to cart',
-        data: 'action=add&itemid=111'
-      },
-      {
-        type: 'uri',
-        label: 'View detail',
-        uri: 'http://example.com/page/111'
+        label: 'Cari Tutorial',
+        data: item.label
       }
     ]
   }))
