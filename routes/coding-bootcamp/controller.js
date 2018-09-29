@@ -6,9 +6,9 @@ function callback(req, res) {
 }
 
 function handleEvent(event) {
-  // console.log('event', event)
-
   let echo = {}
+  console.log(event)
+
   if (event.type == 'message') echo = handleMessage(event.message.text)
   else if (event.type == 'postback') echo = handlePostback(event.postback.data)
 
