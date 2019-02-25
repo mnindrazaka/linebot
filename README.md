@@ -1,7 +1,8 @@
 # linebot
-This is various chatbot for LINE
+Various chatbot for LINE
 
-### Install dependency
+## Development
 ```
-npm install
+$ npm install
+$ npm run dev
 ```
